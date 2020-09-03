@@ -8,7 +8,7 @@ function App() {
 
   Moment().locale('ru');
 
-  const date = new Date(2020, 8, 2);
+  const date = new Date();
 
   return (
     <Calendar date={date}></Calendar>
