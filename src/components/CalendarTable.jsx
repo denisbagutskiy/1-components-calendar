@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CalendarRow } from './CalendarRow';
-import { CalendarTableModel } from '../models/CalendarTableModel';
+import { CalendarCellModel } from '../models/CalendarCellModel';
 
-export function CalendarTable({ model }) {
-
+export function CalendarTable({ table }) {
     return (
         <table className="ui-datepicker-calendar">
             <colgroup>
@@ -28,12 +27,12 @@ export function CalendarTable({ model }) {
             </tr>
             </thead>
             <tbody>
-                {model.rows.map((row, i) => <CalendarRow key={i} model={row}></CalendarRow>)}
+                {table.map((row, i) => <CalendarRow key={i} row={row}></CalendarRow>)}
             </tbody>
         </table>
     );
 } 
 
 CalendarTable.propTypes = {
-    model: PropTypes.instanceOf(CalendarTableModel)
+    table: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.instanceOf(CalendarCellModel)))
 };

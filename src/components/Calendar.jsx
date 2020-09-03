@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
 import { CalendarTable } from './CalendarTable';
-import { CalendarTableModel } from '../models/CalendarTableModel';
-import { CalendarRowModel } from '../models/CalendarRowModel';
 import { CalendarCellModel } from '../models/CalendarCellModel';
 
 function capitalize(s) {
@@ -16,11 +14,9 @@ export function Calendar({ date }) {
     const startWeek = today.clone().startOf('month').week();
     const endWeek = today.clone().endOf('month').week();
 
-    let calendarTable = new CalendarTableModel();
+    let table = [];
     for(let week = startWeek; week <= endWeek; week++){
-        calendarTable.rows.push(new CalendarRowModel({
-            cells: Array(7).fill(0).map((n, i) => new CalendarCellModel({ day: Moment().week(week).startOf('week').clone().add(n + i, 'day'), today: today }))
-        }));
+        table.push(Array(7).fill(0).map((n, i) => new CalendarCellModel({ day: Moment().week(week).startOf('week').clone().add(n + i, 'day'), today: today })));
     };
 
     return (
@@ -38,7 +34,7 @@ export function Calendar({ date }) {
                 <span className="ui-datepicker-month">{capitalize(today.format('MMMM'))}</span>&nbsp;<span className="ui-datepicker-year">{today.format('yyyy')}</span>
                 </div>
             </div>
-            <CalendarTable model={calendarTable}></CalendarTable>
+            <CalendarTable table={table}></CalendarTable>
         </div>
     );
 } 

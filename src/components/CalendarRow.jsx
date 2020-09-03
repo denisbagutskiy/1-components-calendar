@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CalendarRowModel } from '../models/CalendarRowModel';
 import { CalendarCell } from './CalendarCell';
+import { CalendarCellModel } from '../models/CalendarCellModel';
 
-export function CalendarRow({ model }) {
-
+export function CalendarRow({ row }) {
     return (
         <tr>
-            {model.cells.map((cell, i) => 
-                <CalendarCell key={i} model={cell}></CalendarCell>
+            {row.map((cell, i) => 
+                <CalendarCell key={i} cell={cell}></CalendarCell>
             )}
         </tr>
     );
 } 
 
 CalendarRow.propTypes = {
-    week: PropTypes.instanceOf(CalendarRowModel)
+    row: PropTypes.arrayOf(PropTypes.instanceOf(CalendarCellModel))
 };
